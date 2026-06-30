@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Иван Купала в Птичьем Дворе | 4-5 июля</title>
+  <meta name="description" content="Загородный фестиваль Ивана Купалы в Птичьем Дворе: музыка, венки, ярмарка, стрит-фуд, мастер-классы и вечерний костер. 4-5 июля, поселок Новостроево.">
+  <meta property="og:title" content="Иван Купала в Птичьем Дворе">
+  <meta property="og:description" content="4-5 июля: музыка, венки, ярмарка, стрит-фуд, мастер-классы и вечерний костер в загородной атмосфере.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kupala39.ru/">
+  <meta name="theme-color" content="#f3ead7">
+  <style>
+    :root {
+      --bg: #fbf7ef;
+      --paper: #fffdf8;
+      --ink: #243223;
+      --muted: #66715e;
+      --green: #2f5c3b;
+      --green-dark: #203e2a;
+      --yellow: #f4c95d;
+      --terracotta: #b85f36;
+      --line: rgba(36, 50, 35, .14);
+      --shadow: 0 18px 60px rgba(49, 58, 41, .12);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(251, 247, 239, .92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      width: min(1160px, calc(100% - 32px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: .01em;
+    }
+
+    .brand small {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      background: var(--green);
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: var(--green-dark);
+      box-shadow: 0 10px 26px rgba(47, 92, 59, .22);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--green-dark);
+      border-color: rgba(47, 92, 59, .28);
+    }
+
+    .button.secondary:hover {
+      background: rgba(47, 92, 59, .08);
+      box-shadow: none;
+    }
+
+    .hero {
+      min-height: calc(100svh - 64px);
+      display: grid;
+      align-items: stretch;
+      background:
+        linear-gradient(90deg, rgba(33, 49, 29, .76), rgba(33, 49, 29, .42) 46%, rgba(33, 49, 29, .08)),
+        linear-gradient(135deg, #466b43, #e7c973 58%, #b96b3d);
+      color: #fff;
+    }
+
+    .hero-inner {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 86px 0 74px;
+      display: grid;
+      grid-template-columns: minmax(0, 680px) minmax(280px, 380px);
+      align-items: end;
+      gap: 52px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      margin: 0 0 18px;
+      padding: 7px 11px;
+      border: 1px solid rgba(255, 255, 255, .32);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .14);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(42px, 7vw, 84px);
+      line-height: .96;
+      letter-spacing: 0;
+    }
+
+    .hero-lead {
+      max-width: 650px;
+      margin: 22px 0 0;
+      font-size: clamp(18px, 2.3vw, 24px);
+      color: rgba(255, 255, 255, .9);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero .button.secondary {
+      color: #fff;
+      border-color: rgba(255, 255, 255, .42);
+      background: rgba(255, 255, 255, .1);
+    }
+
+    .quick-card {
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .14);
+      backdrop-filter: blur(16px);
+    }
+
+    .quick-card dl {
+      display: grid;
+      gap: 16px;
+      margin: 0;
+    }
+
+    .quick-card div {
+      display: grid;
+      gap: 3px;
+    }
+
+    .quick-card dt {
+      color: rgba(255, 255, 255, .68);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .quick-card dd {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    section {
+      padding: 78px 0;
+    }
+
+    .section-inner {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .section-head p,
+    .large-text {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      min-height: 180px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .tag {
+      padding: 9px 12px;
+      border: 1px solid rgba(47, 92, 59, .22);
+      border-radius: 999px;
+      background: rgba(47, 92, 59, .06);
+      color: var(--green-dark);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .feature-band {
+      background: var(--green-dark);
+      color: #fff;
+    }
+
+    .program {
+      display: grid;
+      gap: 14px;
+    }
+
+    .program-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      padding: 18px 0;
+      border-top: 1px solid rgba(255, 255, 255, .16);
+    }
+
+    .program-time {
+      color: var(--yellow);
+      font-weight: 900;
+    }
+
+    .program-title {
+      margin: 0;
+      font-weight: 900;
+      font-size: 19px;
+    }
+
+    .program-note {
+      margin: 4px 0 0;
+      color: rgba(255, 255, 255, .72);
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .photo-placeholder {
+      min-height: 280px;
+      border-radius: var(--radius);
+      border: 1px dashed rgba(47, 92, 59, .3);
+      background:
+        linear-gradient(145deg, rgba(47, 92, 59, .18), rgba(244, 201, 93, .26)),
+        var(--paper);
+      display: grid;
+      align-content: end;
+      padding: 20px;
+      color: var(--green-dark);
+      font-weight: 900;
+    }
+
+    .photo-placeholder.tall {
+      min-height: 578px;
+    }
+
+    .photo-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .route {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .route-box {
+      padding: 28px;
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .route-box p {
+      color: var(--muted);
+    }
+
+    .faq {
+      display: grid;
+      gap: 12px;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      padding: 18px 20px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    details p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .cta {
+      background:
+        linear-gradient(90deg, rgba(47, 92, 59, .94), rgba(47, 92, 59, .78)),
+        #2f5c3b;
+      color: #fff;
+      text-align: center;
+    }
+
+    .cta p {
+      max-width: 720px;
+      margin: 16px auto 0;
+      color: rgba(255, 255, 255, .82);
+      font-size: 18px;
+    }
+
+    .site-footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        min-height: 58px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner,
+      .route,
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        padding: 58px 0 34px;
+        gap: 34px;
+      }
+
+      section {
+        padding: 56px 0;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .program-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .photo-placeholder,
+      .photo-placeholder.tall {
+        min-height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Главная навигация">
+      <a class="brand" href="#top">
+        Иван Купала
+        <small>Птичий Двор · kupala39.ru</small>
+      </a>
+      <div class="nav-links">
+        <a href="#program">Программа</a>
+        <a href="#route">Как добраться</a>
+        <a href="#faq">Вопросы</a>
+        <a class="button" href="#contacts">Хочу приехать</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Иван Купала в Птичьем Дворе">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">4-5 июля · с 15:00</p>
+          <h1>Иван Купала в Птичьем Дворе</h1>
+          <p class="hero-lead">Загородный летний фестиваль с музыкой, венками, ярмаркой, стрит-фудом, мастер-классами и вечерним костром.</p>
+          <div class="hero-actions">
+            <a class="button" href="#route">Построить маршрут</a>
+            <a class="button secondary" href="#program">Смотреть программу</a>
+          </div>
+        </div>
+        <aside class="quick-card" aria-label="Короткая информация">
+          <dl>
+            <div>
+              <dt>Где</dt>
+              <dd>п. Новостроево, ул. Заречная, 28</dd>
+            </div>
+            <div>
+              <dt>Для кого</dt>
+              <dd>семьи, друзья, пары и гости области</dd>
+            </div>
+            <div>
+              <dt>Формат</dt>
+              <dd>фестиваль на свежем воздухе</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Лето, зелень и живой праздник за городом</h2>
+          <p>Фестиваль для тех, кто хочет выбраться из города, провести вечер на природе и увезти с собой не только фотографии, но и ощущение настоящего летнего дня.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Семейный день</h3>
+            <p>Мастер-классы, ярмарка, еда, прогулка по площадке и спокойная атмосфера для детей и взрослых.</p>
+          </article>
+          <article class="card">
+            <h3>Вечерняя программа</h3>
+            <p>Музыка, огни, костер и тот самый момент, ради которого хочется остаться подольше.</p>
+          </article>
+          <article class="card">
+            <h3>Маршрут выходного дня</h3>
+            <p>Поездку можно совместить с прогулкой по Железнодорожному и небольшим путешествием по области.</p>
+          </article>
+        </div>
+        <div class="tag-list" aria-label="Ключевые активности">
+          <span class="tag">Музыка</span>
+          <span class="tag">Венки</span>
+          <span class="tag">Ярмарка</span>
+          <span class="tag">Стрит-фуд</span>
+          <span class="tag">Мастер-классы</span>
+          <span class="tag">Костер</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band" id="program">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Программа</h2>
+          <p>Черновой блок для согласования. После подтверждения от организаторов сюда ставим финальные активности, время, артистов и условия участия.</p>
+        </div>
+        <div class="program">
+          <article class="program-item">
+            <div class="program-time">15:00</div>
+            <div>
+              <p class="program-title">Открытие площадки</p>
+              <p class="program-note">Ярмарка, фуд-зона, прогулка по локации, первые мастер-классы.</p>
+            </div>
+          </article>
+          <article class="program-item">
+            <div class="program-time">16:00-18:00</div>
+            <div>
+              <p class="program-title">Семейные активности</p>
+              <p class="program-note">Плетение венков, творческие занятия, фермерская атмосфера и фото-зоны.</p>
+            </div>
+          </article>
+          <article class="program-item">
+            <div class="program-time">18:00-20:00</div>
+            <div>
+              <p class="program-title">Музыка и вечерняя часть</p>
+              <p class="program-note">Живая программа, общение, ужин на свежем воздухе.</p>
+            </div>
+          </article>
+          <article class="program-item">
+            <div class="program-time">20:00+</div>
+            <div>
+              <p class="program-title">Костер и летняя магия</p>
+              <p class="program-note">Финальный атмосферный блок. Детали подтверждаются организаторами.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Фото сюда, когда получим материалы</h2>
+          <p>Главный визуальный принцип: реальные кадры прошлого года, локации, еды, мастер-классов и вечернего света. Заглушки ниже показывают, какие фото нужны для страницы.</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-placeholder tall">Hero-фото: люди, зелень, вечерний свет</div>
+          <div class="photo-stack">
+            <div class="photo-placeholder">Еда / фермерские продукты</div>
+            <div class="photo-placeholder">Мастер-классы / дети / венки</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="route">
+      <div class="section-inner route">
+        <div>
+          <h2>Как добраться</h2>
+          <p class="large-text">Птичий Двор находится в поселке Новостроево. Для промо важно сразу дать гостям маршрут, парковку и понятные ориентиры, чтобы поездка не выглядела сложной.</p>
+        </div>
+        <div class="route-box">
+          <h3>Адрес</h3>
+          <p>Калининградская область, п. Новостроево, ул. Заречная, 28</p>
+          <div class="hero-actions">
+            <a class="button" href="https://yandex.ru/maps/?text=%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%B2%D0%BE%20%D0%97%D0%B0%D1%80%D0%B5%D1%87%D0%BD%D0%B0%D1%8F%2028" target="_blank" rel="noopener">Яндекс Карты</a>
+            <a class="button secondary" href="https://www.google.com/maps/search/?api=1&query=%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%B2%D0%BE%20%D0%97%D0%B0%D1%80%D0%B5%D1%87%D0%BD%D0%B0%D1%8F%2028" target="_blank" rel="noopener">Google Maps</a>
+          </div>
+          <p><strong>Нужно уточнить:</strong> парковку, въезд, ориентиры на месте и состояние дороги.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Вопросы гостей</h2>
+          <p>Этот блок закрывает основные сомнения до поездки. Часть ответов пока оставлена как задачи на уточнение.</p>
+        </div>
+        <div class="faq">
+          <details open>
+            <summary>Нужно ли покупать билет заранее?</summary>
+            <p>Информация уточняется у организаторов. После подтверждения добавим условия оплаты и ссылку.</p>
+          </details>
+          <details>
+            <summary>Можно ли приехать с детьми?</summary>
+            <p>Да, фестиваль задуман как семейный загородный формат. Финальный список детских активностей появится в программе.</p>
+          </details>
+          <details>
+            <summary>Будет ли еда на площадке?</summary>
+            <p>Планируется стрит-фуд и фермерская атмосфера. Количество точек и меню нужно подтвердить.</p>
+          </details>
+          <details>
+            <summary>Что будет при плохой погоде?</summary>
+            <p>Нужно уточнить у организаторов наличие навесов, укрытий и погодный план.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contacts">
+      <div class="section-inner">
+        <h2>Планируйте поездку на 4-5 июля</h2>
+        <p>Сохраните страницу, отправьте друзьям и следите за обновлениями программы. Скоро добавим финальное расписание, фото и ссылки на соцсети.</p>
+        <div class="hero-actions" style="justify-content:center">
+          <a class="button" href="#route">Открыть маршрут</a>
+          <a class="button secondary" href="#program">Вернуться к программе</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>Иван Купала в Птичьем Дворе · kupala39.ru</span>
+      <span>Страница готовится к публикации</span>
+    </div>
+  </footer>
+</body>
+</html>
