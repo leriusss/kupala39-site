@@ -4,11 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Иван Купала в Птичьем Дворе | 4-5 июля</title>
-  <meta name="description" content="Загородный фестиваль Ивана Купалы в Птичьем Дворе: музыка, венки, ярмарка, стрит-фуд, мастер-классы и вечерний костер. 4-5 июля, поселок Новостроево.">
+  <meta name="description" content="Загородный фестиваль Ивана Купалы в Птичьем Дворе: мастер-классы, творческие коллективы, народный хоровод, дискотека, DJ Bobby Sound и Light Storm. 4-5 июля, поселок Новостроево.">
   <meta property="og:title" content="Иван Купала в Птичьем Дворе">
-  <meta property="og:description" content="4-5 июля: музыка, венки, ярмарка, стрит-фуд, мастер-классы и вечерний костер в загородной атмосфере.">
+  <meta property="og:description" content="4-5 июля: мастер-классы, творческие коллективы, народный хоровод, дискотека, DJ Bobby Sound и Light Storm.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kupalafest39.ru/">
+  <meta property="og:image" content="https://kupalafest39.ru/assets/images/og-kupalafest.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#f3ead7">
   <style>
     :root {
@@ -39,6 +43,7 @@
       color: var(--ink);
       background: var(--bg);
       line-height: 1.5;
+      overflow-x: hidden;
     }
 
     a {
@@ -128,8 +133,9 @@
       display: grid;
       align-items: stretch;
       background:
-        linear-gradient(90deg, rgba(33, 49, 29, .76), rgba(33, 49, 29, .42) 46%, rgba(33, 49, 29, .08)),
-        linear-gradient(135deg, #466b43, #e7c973 58%, #b96b3d);
+        linear-gradient(90deg, rgba(18, 31, 20, .86), rgba(18, 31, 20, .62) 38%, rgba(18, 31, 20, .16) 72%),
+        url("assets/images/hero-festival-atmosphere.jpg") center / cover no-repeat,
+        #2f5c3b;
       color: #fff;
     }
 
@@ -185,6 +191,7 @@
     }
 
     .quick-card {
+      min-width: 0;
       padding: 24px;
       border: 1px solid rgba(255, 255, 255, .22);
       border-radius: var(--radius);
@@ -213,6 +220,7 @@
       margin: 0;
       font-size: 18px;
       font-weight: 800;
+      overflow-wrap: anywhere;
     }
 
     section {
@@ -290,17 +298,43 @@
       color: #fff;
     }
 
+    .feature-band .section-head p {
+      color: rgba(255, 255, 255, .78);
+    }
+
     .program {
       display: grid;
-      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: start;
+    }
+
+    .program-day {
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .program-day h3 {
+      margin-bottom: 8px;
+      color: var(--yellow);
     }
 
     .program-item {
       display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 18px;
-      padding: 18px 0;
+      grid-template-columns: 74px 1fr;
+      gap: 14px;
+      padding: 14px 0;
       border-top: 1px solid rgba(255, 255, 255, .16);
+    }
+
+    .program-item.highlight {
+      margin: 10px -12px 0;
+      padding: 14px 12px;
+      border: 1px solid rgba(244, 201, 93, .36);
+      border-radius: var(--radius);
+      background: rgba(244, 201, 93, .12);
     }
 
     .program-time {
@@ -319,34 +353,67 @@
       color: rgba(255, 255, 255, .72);
     }
 
+    .partners-block {
+      margin-top: 34px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, .16);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .partners-block h3 {
+      color: var(--yellow);
+    }
+
+    .partners-block ul {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      color: rgba(255, 255, 255, .84);
+    }
+
     .photo-grid {
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      align-items: stretch;
     }
 
-    .photo-placeholder {
-      min-height: 280px;
+    .photo-card {
+      position: relative;
+      min-height: 320px;
+      margin: 0;
+      overflow: hidden;
       border-radius: var(--radius);
-      border: 1px dashed rgba(47, 92, 59, .3);
-      background:
-        linear-gradient(145deg, rgba(47, 92, 59, .18), rgba(244, 201, 93, .26)),
-        var(--paper);
-      display: grid;
-      align-content: end;
-      padding: 20px;
-      color: var(--green-dark);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .photo-card.featured {
+      grid-row: span 2;
+      min-height: 658px;
+    }
+
+    .photo-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .photo-card figcaption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 54px 18px 18px;
+      background: linear-gradient(180deg, transparent, rgba(17, 28, 18, .78));
+      color: #fff;
       font-weight: 900;
-    }
-
-    .photo-placeholder.tall {
-      min-height: 578px;
-    }
-
-    .photo-stack {
-      display: grid;
-      gap: 18px;
     }
 
     .route {
@@ -404,6 +471,12 @@
       font-size: 18px;
     }
 
+    .cta .button.secondary {
+      color: #fff;
+      border-color: rgba(255, 255, 255, .42);
+      background: rgba(255, 255, 255, .1);
+    }
+
     .site-footer {
       padding: 28px 0;
       border-top: 1px solid var(--line);
@@ -431,17 +504,39 @@
 
       .hero {
         min-height: auto;
+        background-position: 58% center;
       }
 
       .hero-inner,
-      .route,
-      .photo-grid {
+      .route {
         grid-template-columns: 1fr;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .hero-inner {
         padding: 58px 0 34px;
         gap: 34px;
+      }
+
+      h1 {
+        font-size: clamp(36px, 12vw, 56px);
+      }
+
+      .hero-lead {
+        font-size: 18px;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .hero-actions .button {
+        justify-content: center;
+        width: 100%;
       }
 
       section {
@@ -452,14 +547,40 @@
         grid-template-columns: 1fr;
       }
 
+      .program,
+      .partners-block {
+        grid-template-columns: 1fr;
+      }
+
+      .program-day {
+        padding: 20px;
+      }
+
       .program-item {
         grid-template-columns: 1fr;
         gap: 6px;
       }
 
-      .photo-placeholder,
-      .photo-placeholder.tall {
-        min-height: 220px;
+      .photo-card,
+      .photo-card.featured {
+        min-height: 300px;
+      }
+
+      .photo-card.featured {
+        grid-row: span 1;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero {
+        background:
+          linear-gradient(90deg, rgba(18, 31, 20, .9), rgba(18, 31, 20, .64) 58%, rgba(18, 31, 20, .24)),
+          url("assets/images/hero-festival-atmosphere.jpg") 56% center / cover no-repeat,
+          #2f5c3b;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -486,7 +607,7 @@
         <div>
           <p class="eyebrow">4-5 июля · с 15:00</p>
           <h1>Иван Купала в Птичьем Дворе</h1>
-          <p class="hero-lead">Загородный летний фестиваль с музыкой, венками, ярмаркой, стрит-фудом, мастер-классами и вечерним костром.</p>
+          <p class="hero-lead">Загородный летний фестиваль с мастер-классами, творческими коллективами, народным хороводом, дискотекой и вечерним шоу.</p>
           <div class="hero-actions">
             <a class="button" href="#route">Построить маршрут</a>
             <a class="button secondary" href="#program">Смотреть программу</a>
@@ -520,7 +641,7 @@
         <div class="grid-3">
           <article class="card">
             <h3>Семейный день</h3>
-            <p>Мастер-классы, ярмарка, еда, прогулка по площадке и спокойная атмосфера для детей и взрослых.</p>
+            <p>Мастер-классы, прогулка по площадке, фото-зоны и спокойная атмосфера для детей и взрослых.</p>
           </article>
           <article class="card">
             <h3>Вечерняя программа</h3>
@@ -532,12 +653,12 @@
           </article>
         </div>
         <div class="tag-list" aria-label="Ключевые активности">
-          <span class="tag">Музыка</span>
-          <span class="tag">Венки</span>
-          <span class="tag">Ярмарка</span>
-          <span class="tag">Стрит-фуд</span>
           <span class="tag">Мастер-классы</span>
-          <span class="tag">Костер</span>
+          <span class="tag">Творческие коллективы</span>
+          <span class="tag">DJ Bobby Sound</span>
+          <span class="tag">Light Storm</span>
+          <span class="tag">Хоровод</span>
+          <span class="tag">Кострище</span>
         </div>
       </div>
     </section>
@@ -546,37 +667,90 @@
       <div class="section-inner">
         <div class="section-head">
           <h2>Программа</h2>
-          <p>Черновой блок для согласования. После подтверждения от организаторов сюда ставим финальные активности, время, артистов и условия участия.</p>
+          <p>Два летних дня в Птичьем Дворе: сбор гостей, мастер-классы, концертные программы и вечерние события у костра.</p>
         </div>
         <div class="program">
-          <article class="program-item">
-            <div class="program-time">15:00</div>
-            <div>
-              <p class="program-title">Открытие площадки</p>
-              <p class="program-note">Ярмарка, фуд-зона, прогулка по локации, первые мастер-классы.</p>
+          <article class="program-day">
+            <h3>4 июля</h3>
+            <div class="program-item">
+              <div class="program-time">15:00</div>
+              <p class="program-title">Сбор гостей</p>
+            </div>
+            <div class="program-item">
+              <div class="program-time">16:00</div>
+              <p class="program-title">Мастер-классы</p>
+            </div>
+            <div class="program-item">
+              <div class="program-time">18:00</div>
+              <p class="program-title">Выступление творческих коллективов ДК «Железнодорожный». Дефиле народно-стилизованное</p>
+            </div>
+            <div class="program-item">
+              <div class="program-time">19:00</div>
+              <p class="program-title">Розыгрыш лотерейных билетов</p>
+            </div>
+            <div class="program-item">
+              <div class="program-time">20:00</div>
+              <p class="program-title">Выступление ансамбля народной песни «Забава», г. Полесск</p>
+            </div>
+            <div class="program-item highlight">
+              <div class="program-time">21:30</div>
+              <p class="program-title">Кострище, народный хоровод</p>
+            </div>
+            <div class="program-item highlight">
+              <div class="program-time">22:30</div>
+              <p class="program-title">Дискотека</p>
             </div>
           </article>
-          <article class="program-item">
-            <div class="program-time">16:00-18:00</div>
-            <div>
-              <p class="program-title">Семейные активности</p>
-              <p class="program-note">Плетение венков, творческие занятия, фермерская атмосфера и фото-зоны.</p>
+          <article class="program-day">
+            <h3>5 июля</h3>
+            <div class="program-item">
+              <div class="program-time">15:00</div>
+              <p class="program-title">Сбор гостей</p>
+            </div>
+            <div class="program-item">
+              <div class="program-time">16:00</div>
+              <p class="program-title">Мастер-классы. Приготовление купальской похлёбки «Солнцеворот»</p>
+            </div>
+            <div class="program-item">
+              <div class="program-time">17:00</div>
+              <p class="program-title">Выступление творческих коллективов Правдинского района «Калинушка» и «Веселуха»</p>
+            </div>
+            <div class="program-item">
+              <div class="program-time">18:00</div>
+              <p class="program-title">Розыгрыш лотерейных билетов</p>
+            </div>
+            <div class="program-item highlight">
+              <div class="program-time">19:00</div>
+              <p class="program-title">Танцы на траве от DJ Bobby Sound, “то самое из прошлого”</p>
+            </div>
+            <div class="program-item highlight">
+              <div class="program-time">21:30</div>
+              <p class="program-title">Кострище, народный хоровод</p>
+            </div>
+            <div class="program-item highlight">
+              <div class="program-time">23:00</div>
+              <p class="program-title">Шоу от театра огня и света «Light Storm»</p>
             </div>
           </article>
-          <article class="program-item">
-            <div class="program-time">18:00-20:00</div>
-            <div>
-              <p class="program-title">Музыка и вечерняя часть</p>
-              <p class="program-note">Живая программа, общение, ужин на свежем воздухе.</p>
-            </div>
-          </article>
-          <article class="program-item">
-            <div class="program-time">20:00+</div>
-            <div>
-              <p class="program-title">Костер и летняя магия</p>
-              <p class="program-note">Финальный атмосферный блок. Детали подтверждаются организаторами.</p>
-            </div>
-          </article>
+        </div>
+        <div class="partners-block" aria-label="Организаторы и партнёры">
+          <div>
+            <h3>Организаторы</h3>
+            <ul>
+              <li>Маргарита Серебро</li>
+              <li>Культурное пространство «Музей Быта»</li>
+              <li>Агроусадьба «Птичий двор»</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Партнёры проекта</h3>
+            <ul>
+              <li>Янтарь холл, город Светлогорск</li>
+              <li>Лесэксперт</li>
+              <li>Атомото, центр профессионального оборудования</li>
+              <li>Ялта клуб</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -584,15 +758,34 @@
     <section>
       <div class="section-inner">
         <div class="section-head">
-          <h2>Фото сюда, когда получим материалы</h2>
-          <p>Главный визуальный принцип: реальные кадры прошлого года, локации, еды, мастер-классов и вечернего света. Заглушки ниже показывают, какие фото нужны для страницы.</p>
+          <h2>Как выглядит праздник</h2>
+          <p>Реальные кадры с площадки: зелень, мастер-классы, фото-зоны, еда и живые семейные моменты.</p>
         </div>
         <div class="photo-grid">
-          <div class="photo-placeholder tall">Hero-фото: люди, зелень, вечерний свет</div>
-          <div class="photo-stack">
-            <div class="photo-placeholder">Еда / фермерские продукты</div>
-            <div class="photo-placeholder">Мастер-классы / дети / венки</div>
-          </div>
+          <figure class="photo-card featured">
+            <img src="assets/images/festival-grounds-atmosphere.jpg" alt="Гости фестиваля на зеленой площадке среди деревьев" width="1280" height="960" loading="lazy">
+            <figcaption>Атмосфера фестиваля</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/images/festival-workshops.jpg" alt="Участники рисуют на мастер-классе за мольбертами" width="1280" height="960" loading="lazy">
+            <figcaption>Мастер-классы</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/images/festival-photo-zone.jpg" alt="Гости фотографируются у деревянной фото-зоны на траве" width="1280" height="960" loading="lazy">
+            <figcaption>Фото-зона</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/images/festival-food-zone.jpg" alt="Гости выбирают еду в летней фуд-зоне" width="1280" height="960" loading="lazy">
+            <figcaption>Еда</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/images/festival-kids-wreath.jpg" alt="Девочка в венке на летней фестивальной площадке" width="1280" height="960" loading="lazy">
+            <figcaption>Венки и дети</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="assets/images/festival-ethnic-photo-zone.jpg" alt="Гости в этнических костюмах рядом с фото-зоной" width="1280" height="960" loading="lazy">
+            <figcaption>Этника</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -624,15 +817,15 @@
         <div class="faq">
           <details open>
             <summary>Нужно ли покупать билет заранее?</summary>
-            <p>Информация уточняется у организаторов. После подтверждения добавим условия оплаты и ссылку.</p>
+            <p>Условия участия и оплаты нужно уточнить у организаторов.</p>
           </details>
           <details>
             <summary>Можно ли приехать с детьми?</summary>
-            <p>Да, фестиваль задуман как семейный загородный формат. Финальный список детских активностей появится в программе.</p>
+            <p>Да, фестиваль задуман как семейный загородный формат. Ориентируйтесь на расписание выше и выбирайте удобное время приезда.</p>
           </details>
           <details>
             <summary>Будет ли еда на площадке?</summary>
-            <p>Планируется стрит-фуд и фермерская атмосфера. Количество точек и меню нужно подтвердить.</p>
+            <p>Детали по еде и точкам на площадке нужно подтвердить у организаторов.</p>
           </details>
           <details>
             <summary>Что будет при плохой погоде?</summary>
@@ -645,7 +838,7 @@
     <section class="cta" id="contacts">
       <div class="section-inner">
         <h2>Планируйте поездку на 4-5 июля</h2>
-        <p>Сохраните страницу, отправьте друзьям и следите за обновлениями программы. Скоро добавим финальное расписание, фото и ссылки на соцсети.</p>
+        <p>Сохраните страницу, отправьте друзьям и выбирайте день по расписанию. Актуальная программа уже на сайте.</p>
         <div class="hero-actions" style="justify-content:center">
           <a class="button" href="#route">Открыть маршрут</a>
           <a class="button secondary" href="#program">Вернуться к программе</a>

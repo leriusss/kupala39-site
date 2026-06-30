@@ -1,0 +1,36 @@
+# Local source materials and generated marketing assets
+data/
+_visual_review_contact.jpg
+_video_frames/
+
+# Keep markdown planning files trackable, but do not commit heavy copied media.
+materials/00_inbox/*
+materials/01_photo_raw/**
+materials/02_video_raw/**
+materials/03_selected/**
+materials/04_exports/**
+materials/05_docs/**
+materials/06_archive/**
+!materials/
+!materials/README.md
+!materials/SELECTION_NOTES.md
+
+# Heavy originals and delivery artifacts require explicit approval before commit.
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.raw
+*.cr2
+*.nef
+*.arw
+*.dng
+*.psd
+*.ai
+*.indd
