@@ -12,6 +12,18 @@
 
 `scripts/deploy.sh` — скрипт обновления сайта на VPS.
 
+## Campaign hub
+
+Campaign strategy, content planning, partner outreach, asset notes and reporting live outside this website repository:
+
+`..\marketing-kit`
+
+Keep this repository focused on website implementation and website assets.
+
+## Route / maps policy
+
+The public landing page currently uses Yandex Maps as the only route CTA. Google Maps and 2GIS route buttons are intentionally not used on the public site until their address data is reliable enough for guests.
+
 ## Хостинг
 
 План: хранить код на GitHub, а сайт публиковать на внешнем VPS через nginx, рядом с существующими проектами пользователя.
@@ -30,13 +42,13 @@ bash /opt/kupalafest39-site/scripts/deploy.sh
 
 Скрипт подтянет свежую версию из GitHub, обновит публичные файлы, проверит nginx и перезагрузит конфигурацию.
 
-## Что заменить перед публикацией
+## Что проверить перед следующей публикацией
 
-1. Добавить реальные фото в лендинг вместо визуальных заглушек.
-2. Подтвердить программу, цену входа, парковку и погодный план.
-3. Добавить ссылки на VK-событие, Telegram и контакт организатора.
-4. Подготовить OG-картинку для красивого превью в соцсетях.
-5. Настроить DNS для `kupalafest39.ru` и `www.kupalafest39.ru` на VPS.
+1. Добавить финальные ссылки на VK-событие и Telegram после подтверждения.
+2. Добавить контакт организатора для вопросов гостей после подтверждения.
+3. Добавить погодный план и pets policy после подтверждения.
+4. Не менять подтвержденные факты без сверки с `..\marketing-kit`.
+5. Сохранять Yandex Maps как единственный публичный route CTA, пока Google/2GIS не подтверждены как надежные для точного адреса.
 
 ## Минимальная схема запуска на VPS
 
