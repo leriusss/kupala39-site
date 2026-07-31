@@ -199,9 +199,12 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 20px;
       background: rgba(19, 31, 38, .54);
       backdrop-filter: blur(10px);
+      overflow: hidden;
     }
 
     .party-dialog.is-open {
@@ -211,9 +214,12 @@
     .party-dialog-panel {
       position: relative;
       display: grid;
-      grid-template-columns: minmax(340px, .82fr) minmax(0, 1fr);
-      width: min(960px, 100%);
-      max-height: calc(100svh - 48px);
+      grid-template-columns: minmax(320px, .8fr) minmax(0, 1fr);
+      width: min(940px, 100%);
+      height: min(780px, calc(100vh - 40px));
+      height: min(780px, calc(100dvh - 40px));
+      max-height: calc(100vh - 40px);
+      max-height: calc(100dvh - 40px);
       overflow: hidden;
       border: 1px solid rgba(255, 248, 236, .24);
       border-radius: 20px;
@@ -240,7 +246,7 @@
     .party-dialog-media {
       position: relative;
       z-index: 1;
-      min-height: 100%;
+      min-height: 0;
       background: #172d4c;
     }
 
@@ -255,7 +261,7 @@
     .party-dialog-media img {
       width: 100%;
       height: 100%;
-      min-height: 610px;
+      min-height: 0;
       display: block;
       object-fit: cover;
       object-position: 51% 46%;
@@ -265,7 +271,24 @@
       position: relative;
       z-index: 1;
       align-self: center;
-      padding: clamp(28px, 4vw, 44px) clamp(28px, 4.6vw, 52px);
+      max-height: 100%;
+      overflow-y: auto;
+      padding: clamp(22px, 3vw, 34px) clamp(28px, 4.2vw, 48px);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 248, 236, .28) transparent;
+    }
+
+    .party-dialog-content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .party-dialog-content::-webkit-scrollbar-thumb {
+      border-radius: 99px;
+      background: rgba(255, 248, 236, .25);
+    }
+
+    .party-dialog-content::-webkit-scrollbar-track {
+      background: transparent;
     }
 
     .party-close {
@@ -321,7 +344,7 @@
 
     .party-lead {
       max-width: 480px;
-      margin: 18px 0 0;
+      margin: 14px 0 0;
       color: rgba(255, 248, 236, .86);
       font-size: clamp(17px, 1.35vw, 19px);
       font-weight: 400;
@@ -332,7 +355,7 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px 18px;
-      margin: 24px 0 0;
+      margin: 18px 0 0;
       padding: 0;
       list-style: none;
     }
@@ -359,7 +382,7 @@
     }
 
     .party-highlights-title {
-      margin: 24px 0 12px;
+      margin: 16px 0 8px;
       color: #ffd76a;
       font-size: 15px;
       font-weight: 600;
@@ -399,7 +422,7 @@
     }
 
     .party-extra {
-      margin: 22px 0 0;
+      margin: 14px 0 0;
       padding-left: 16px;
       border-left: 2px solid #d9a92d;
       color: rgba(255, 248, 236, .9);
@@ -411,7 +434,7 @@
     .party-actions {
       display: flex;
       justify-content: flex-start;
-      margin-top: 24px;
+      margin-top: 12px;
     }
 
     .party-ok {
@@ -1245,7 +1268,9 @@
       .party-dialog-panel {
         grid-template-columns: 1fr;
         align-self: center;
+        height: auto;
         max-height: calc(100svh - 24px);
+        max-height: calc(100dvh - 24px);
         overflow-y: auto;
         scrollbar-width: none;
       }
@@ -1702,7 +1727,9 @@
     const partyPanel = document.querySelector("[data-party-panel]");
     const partyClose = document.querySelector("[data-party-close]");
     const partyOk = document.querySelector("[data-party-ok]");
+    const partyStorageKey = "partyPopupShown";
     let partyLastFocus = null;
+    let partyAutoOpenTimer = null;
 
     function setHeaderState() {
       header.classList.toggle("is-scrolled", window.scrollY > 24);
@@ -1725,8 +1752,37 @@
       setHeaderState();
     }
 
-    function openPartyDialog() {
-      partyLastFocus = document.activeElement === document.body ? partyOpen : document.activeElement;
+    function canUsePartySessionStorage() {
+      try {
+        const testKey = "__party_storage_test__";
+        sessionStorage.setItem(testKey, "1");
+        sessionStorage.removeItem(testKey);
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function hasPartyPopupAutoShown() {
+      if (!canUsePartySessionStorage()) return false;
+      try {
+        return sessionStorage.getItem(partyStorageKey) === "1";
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function markPartyPopupAutoShown() {
+      if (!canUsePartySessionStorage()) return;
+      try {
+        sessionStorage.setItem(partyStorageKey, "1");
+      } catch (error) {
+        // Storage can be blocked in privacy modes; auto-open should fail softly.
+      }
+    }
+
+    function openPartyDialog(mode = "manual") {
+      partyLastFocus = mode === "manual" ? partyOpen : null;
       partyDialog.hidden = false;
       partyDialog.classList.add("is-open");
       document.body.classList.add("dialog-open");
@@ -1739,14 +1795,26 @@
       document.body.classList.remove("dialog-open");
       if (partyLastFocus && typeof partyLastFocus.focus === "function") {
         partyLastFocus.focus();
-      } else {
-        partyOpen.focus();
       }
+      partyLastFocus = null;
+    }
+
+    function schedulePartyAutoOpen() {
+      if (partyAutoOpenTimer || hasPartyPopupAutoShown()) return;
+      partyAutoOpenTimer = window.setTimeout(() => {
+        partyAutoOpenTimer = null;
+        if (!partyDialog.hidden || document.body.classList.contains("nav-open")) return;
+        markPartyPopupAutoShown();
+        openPartyDialog("auto");
+      }, 1300);
     }
 
     setHeaderState();
     window.addEventListener("scroll", setHeaderState, { passive: true });
-    window.addEventListener("load", () => requestAnimationFrame(scrollToCurrentHash));
+    window.addEventListener("load", () => {
+      requestAnimationFrame(scrollToCurrentHash);
+    });
+    schedulePartyAutoOpen();
     window.addEventListener("hashchange", () => requestAnimationFrame(scrollToCurrentHash));
 
     menuToggle.addEventListener("click", () => {
@@ -1757,11 +1825,11 @@
       document.body.classList.toggle("nav-open", !isOpen);
     });
 
-    partyOpen.addEventListener("click", openPartyDialog);
+    partyOpen.addEventListener("click", () => openPartyDialog("manual"));
     partyOpen.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        openPartyDialog();
+        openPartyDialog("manual");
       }
     });
     partyClose.addEventListener("click", closePartyDialog);
