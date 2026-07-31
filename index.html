@@ -14,6 +14,9 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#fff8ec">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Prata&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --color-ivory: #fff8ec;
@@ -27,6 +30,9 @@
       --space-section: clamp(56px, 6vw, 88px);
       --radius: 18px;
       --shadow-soft: 0 18px 54px rgba(48, 59, 37, .13);
+      --ticker-height: 42px;
+      --party-serif: Prata, Georgia, "Times New Roman", serif;
+      --party-sans: Manrope, "Segoe UI", Arial, sans-serif;
     }
 
     * {
@@ -50,6 +56,110 @@
       overflow: hidden;
     }
 
+    body.dialog-open {
+      overflow: hidden;
+    }
+
+    .party-ticker {
+      position: relative;
+      z-index: 70;
+      width: 100%;
+      min-height: var(--ticker-height);
+      display: block;
+      overflow: hidden;
+      border: 0;
+      border-bottom: 1px solid rgba(255, 248, 236, .22);
+      padding: 0;
+      cursor: pointer;
+      color: #fff8ec;
+      font-family: var(--party-sans);
+      background:
+        linear-gradient(90deg, rgba(117, 22, 31, .26), transparent 18%, transparent 82%, rgba(117, 22, 31, .26)),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, .035) 0 2px, transparent 2px 10px),
+        #244a72;
+      box-shadow: 0 10px 26px rgba(24, 38, 56, .16);
+      text-align: left;
+    }
+
+    .party-ticker::before,
+    .party-ticker::after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+      width: 90px;
+      content: "";
+      pointer-events: none;
+    }
+
+    .party-ticker::before {
+      left: 0;
+      background: linear-gradient(90deg, #244a72, rgba(36, 74, 114, 0));
+    }
+
+    .party-ticker::after {
+      right: 0;
+      background: linear-gradient(270deg, #244a72, rgba(36, 74, 114, 0));
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      min-height: var(--ticker-height);
+      align-items: center;
+      animation: partyTicker 34s linear infinite;
+      animation-delay: 1.8s;
+    }
+
+    .ticker-group {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+    }
+
+    .ticker-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      padding-right: 18px;
+      white-space: nowrap;
+      font-family: var(--party-sans);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: .005em;
+    }
+
+    .ticker-line::before {
+      width: 9px;
+      height: 9px;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: #9f2632;
+      box-shadow: 0 0 0 4px rgba(159, 38, 50, .22);
+      content: "";
+    }
+
+    @keyframes partyTicker {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track {
+        animation: none;
+      }
+
+      .ticker-group + .ticker-group,
+      .ticker-line + .ticker-line {
+        display: none;
+      }
+    }
+
     img {
       max-width: 100%;
     }
@@ -67,7 +177,7 @@
 
     .site-header {
       position: fixed;
-      inset: 0 0 auto;
+      inset: var(--ticker-height) 0 auto;
       z-index: 50;
       padding: 18px 0;
       color: #fffdf6;
@@ -80,6 +190,247 @@
       color: var(--color-green-dark);
       box-shadow: 0 14px 42px rgba(48, 59, 37, .11);
       backdrop-filter: blur(18px);
+    }
+
+    .party-dialog {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(19, 31, 38, .54);
+      backdrop-filter: blur(10px);
+    }
+
+    .party-dialog.is-open {
+      display: flex;
+    }
+
+    .party-dialog-panel {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(340px, .82fr) minmax(0, 1fr);
+      width: min(960px, 100%);
+      max-height: calc(100svh - 48px);
+      overflow: hidden;
+      border: 1px solid rgba(255, 248, 236, .24);
+      border-radius: 20px;
+      color: #fff8ec;
+      font-family: var(--party-sans);
+      background:
+        radial-gradient(circle at 92% 10%, rgba(191, 45, 58, .22), transparent 30%),
+        radial-gradient(circle at 52% 100%, rgba(217, 169, 45, .12), transparent 34%),
+        linear-gradient(135deg, rgba(23, 45, 76, .99), rgba(47, 72, 112, .97) 48%, rgba(31, 44, 70, .99));
+      box-shadow: 0 28px 86px rgba(10, 18, 24, .4);
+    }
+
+    .party-dialog-panel::before {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, .025) 0 1px, transparent 1px 4px),
+        linear-gradient(90deg, rgba(159, 38, 50, .08), transparent 24%, transparent 82%, rgba(159, 38, 50, .12));
+      content: "";
+      pointer-events: none;
+    }
+
+    .party-dialog-media {
+      position: relative;
+      z-index: 1;
+      min-height: 100%;
+      background: #172d4c;
+    }
+
+    .party-dialog-media::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 72%, rgba(23, 45, 76, .42));
+      content: "";
+      pointer-events: none;
+    }
+
+    .party-dialog-media img {
+      width: 100%;
+      height: 100%;
+      min-height: 610px;
+      display: block;
+      object-fit: cover;
+      object-position: 51% 46%;
+    }
+
+    .party-dialog-content {
+      position: relative;
+      z-index: 1;
+      align-self: center;
+      padding: clamp(28px, 4vw, 44px) clamp(28px, 4.6vw, 52px);
+    }
+
+    .party-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 2;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(217, 169, 45, .7);
+      border-radius: 999px;
+      color: #fff8ec;
+      background: rgba(16, 31, 48, .44);
+      cursor: pointer;
+      font-family: var(--party-sans);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1;
+      transition: background .2s ease, border-color .2s ease;
+    }
+
+    .party-close:hover {
+      border-color: rgba(255, 248, 236, .58);
+      background: rgba(255, 248, 236, .12);
+    }
+
+    .party-close:focus-visible {
+      outline: 2px solid rgba(217, 169, 45, .75);
+      outline-offset: 2px;
+    }
+
+    .party-eyebrow {
+      margin: 0 0 10px;
+      color: #ffd76a;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .party-dialog h2 {
+      max-width: 430px;
+      color: #fff8ec;
+      font-family: var(--party-serif);
+      font-size: clamp(42px, 3.6vw, 51px);
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -.015em;
+      text-shadow: none;
+    }
+
+    .party-lead {
+      max-width: 480px;
+      margin: 18px 0 0;
+      color: rgba(255, 248, 236, .86);
+      font-size: clamp(17px, 1.35vw, 19px);
+      font-weight: 400;
+      line-height: 1.58;
+    }
+
+    .party-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 18px;
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .party-facts li {
+      position: relative;
+      min-width: 0;
+      padding-left: 14px;
+      color: rgba(255, 248, 236, .9);
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.42;
+    }
+
+    .party-facts li::before {
+      position: absolute;
+      left: 0;
+      top: .55em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #d23b47;
+      content: "";
+    }
+
+    .party-highlights-title {
+      margin: 24px 0 12px;
+      color: #ffd76a;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .party-highlights {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 18px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: rgba(255, 248, 236, .9);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.42;
+    }
+
+    .party-highlights-mobile {
+      display: none;
+    }
+
+    .party-highlights li {
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .party-highlights li::before {
+      position: absolute;
+      left: 0;
+      top: .58em;
+      width: 5px;
+      height: 5px;
+      border-radius: 99px;
+      background: #b4313d;
+      content: "";
+    }
+
+    .party-extra {
+      margin: 22px 0 0;
+      padding-left: 16px;
+      border-left: 2px solid #d9a92d;
+      color: rgba(255, 248, 236, .9);
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .party-actions {
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 24px;
+    }
+
+    .party-ok {
+      min-width: 160px;
+      border: 1px solid rgba(255, 248, 236, .32);
+      background: #fff8ec;
+      color: #244a72;
+      font-family: var(--party-sans);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
     }
 
     .nav {
@@ -720,6 +1071,14 @@
     }
 
     @media (max-width: 900px) {
+      :root {
+        --ticker-height: 40px;
+      }
+
+      .ticker-line {
+        font-size: 14px;
+      }
+
       .site-header {
         padding: 12px 0;
       }
@@ -877,6 +1236,99 @@
         white-space: normal;
         line-height: 1.2;
       }
+
+      .party-dialog {
+        align-items: stretch;
+        padding: 12px;
+      }
+
+      .party-dialog-panel {
+        grid-template-columns: 1fr;
+        align-self: center;
+        max-height: calc(100svh - 24px);
+        overflow-y: auto;
+        scrollbar-width: none;
+      }
+
+      .party-dialog-panel::-webkit-scrollbar {
+        display: none;
+      }
+
+      .party-dialog-media {
+        min-height: 0;
+      }
+
+      .party-dialog-media::after {
+        background: linear-gradient(0deg, rgba(23, 45, 76, .3), transparent 38%);
+      }
+
+      .party-dialog-media img {
+        height: clamp(150px, 42vw, 190px);
+        min-height: 0;
+        object-position: 50% 40%;
+      }
+
+      .party-dialog-content {
+        padding: 20px 26px 22px;
+      }
+
+      .party-dialog h2 {
+        font-size: clamp(34px, 8.8vw, 39px);
+        line-height: 1.08;
+      }
+
+      .party-lead {
+        margin-top: 12px;
+        font-size: 16px;
+        line-height: 1.48;
+      }
+
+      .party-facts,
+      .party-highlights {
+        grid-template-columns: 1fr;
+      }
+
+      .party-facts {
+        gap: 7px;
+        margin-top: 16px;
+        font-size: 14px;
+      }
+
+      .party-highlights {
+        gap: 7px;
+        font-size: 14px;
+      }
+
+      .party-highlights-title {
+        margin-top: 18px;
+        margin-bottom: 8px;
+      }
+
+      .party-highlights-desktop {
+        display: none;
+      }
+
+      .party-highlights-mobile {
+        display: grid;
+      }
+
+      .party-extra {
+        margin-top: 16px;
+        font-size: 14px;
+      }
+
+      .party-actions {
+        margin-top: 16px;
+      }
+
+      .party-ok {
+        width: 100%;
+      }
+
+      .party-close {
+        top: 10px;
+        right: 10px;
+      }
     }
 
     @media (max-width: 620px) {
@@ -930,6 +1382,59 @@
   </style>
 </head>
 <body>
+  <button class="party-ticker" type="button" data-party-open aria-haspopup="dialog" aria-controls="denim-party-dialog" aria-label="Открыть подробности русской джинсовой вечеринки">
+    <span class="ticker-track" aria-hidden="true">
+      <span class="ticker-group">
+        <span class="ticker-line">8 августа · Русская джинсовая вечеринка в Птичьем Дворе · Джинса + русский акцент · Еда на огне · Дискотека · Фаер-шоу · 3000 ₽ с человека ·</span>
+        <span class="ticker-line">8 августа · Русская джинсовая вечеринка в Птичьем Дворе · Джинса + русский акцент · Еда на огне · Дискотека · Фаер-шоу · 3000 ₽ с человека ·</span>
+      </span>
+      <span class="ticker-group">
+        <span class="ticker-line">8 августа · Русская джинсовая вечеринка в Птичьем Дворе · Джинса + русский акцент · Еда на огне · Дискотека · Фаер-шоу · 3000 ₽ с человека ·</span>
+        <span class="ticker-line">8 августа · Русская джинсовая вечеринка в Птичьем Дворе · Джинса + русский акцент · Еда на огне · Дискотека · Фаер-шоу · 3000 ₽ с человека ·</span>
+      </span>
+    </span>
+    <span class="sr-only">8 августа: Русская джинсовая вечеринка в Птичьем Дворе. Открыть подробности.</span>
+  </button>
+
+  <div class="party-dialog" id="denim-party-dialog" role="dialog" aria-modal="true" aria-labelledby="denim-party-title" aria-describedby="denim-party-lead" hidden data-party-dialog>
+    <div class="party-dialog-panel" data-party-panel>
+      <button class="party-close" type="button" data-party-close aria-label="Закрыть подробности">×</button>
+      <div class="party-dialog-media">
+        <img src="assets/images/v2/russian-denim-party-poster.webp" alt="Афиша русской джинсовой вечеринки с кокошником, джинсовым фоном и красными акцентами">
+      </div>
+      <div class="party-dialog-content">
+        <p class="party-eyebrow">8 августа · 15:00–22:30</p>
+        <h2 id="denim-party-title">Русская джинсовая вечеринка</h2>
+        <p class="party-lead" id="denim-party-lead">Джинса, кокошники, красные бусы, живая музыка, еда на огне, дискотека и фаер-шоу на природе.</p>
+        <ul class="party-facts" aria-label="Ключевые факты">
+          <li>Агроусадьба «Птичий Двор»</li>
+          <li>3000 ₽ с человека</li>
+          <li>Алкоголь можно взять с собой</li>
+          <li>Дресс-код: джинса + русский акцент</li>
+        </ul>
+        <p class="party-highlights-title">Что будет</p>
+        <ul class="party-highlights party-highlights-desktop">
+          <li>Фотозоны и сцена</li>
+          <li>Еда на живом огне</li>
+          <li>Ведущая, диджей и артисты</li>
+          <li>Конкурсы, фанты и батлы</li>
+          <li>Шаржи, фотограф и полароид</li>
+          <li>Фаер-шоу</li>
+        </ul>
+        <ul class="party-highlights party-highlights-mobile">
+          <li>Еда на живом огне</li>
+          <li>Ведущая и диджей</li>
+          <li>Конкурсы и фотозоны</li>
+          <li>Фаер-шоу</li>
+        </ul>
+        <p class="party-extra">Готовьте образы — будет красиво, душевно и с огоньком.</p>
+        <div class="party-actions">
+          <button class="button party-ok" type="button" data-party-ok>Понятно</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header class="site-header" data-header>
     <nav class="nav" aria-label="Главная навигация">
       <a class="brand" href="#top" aria-label="Иван Купала в Птичьем Дворе">
@@ -1192,6 +1697,12 @@
     const slider = document.querySelector("[data-activity-slider]");
     const prev = document.querySelector("[data-slider-prev]");
     const next = document.querySelector("[data-slider-next]");
+    const partyOpen = document.querySelector("[data-party-open]");
+    const partyDialog = document.querySelector("[data-party-dialog]");
+    const partyPanel = document.querySelector("[data-party-panel]");
+    const partyClose = document.querySelector("[data-party-close]");
+    const partyOk = document.querySelector("[data-party-ok]");
+    let partyLastFocus = null;
 
     function setHeaderState() {
       header.classList.toggle("is-scrolled", window.scrollY > 24);
@@ -1214,6 +1725,25 @@
       setHeaderState();
     }
 
+    function openPartyDialog() {
+      partyLastFocus = document.activeElement === document.body ? partyOpen : document.activeElement;
+      partyDialog.hidden = false;
+      partyDialog.classList.add("is-open");
+      document.body.classList.add("dialog-open");
+      partyClose.focus();
+    }
+
+    function closePartyDialog() {
+      partyDialog.classList.remove("is-open");
+      partyDialog.hidden = true;
+      document.body.classList.remove("dialog-open");
+      if (partyLastFocus && typeof partyLastFocus.focus === "function") {
+        partyLastFocus.focus();
+      } else {
+        partyOpen.focus();
+      }
+    }
+
     setHeaderState();
     window.addEventListener("scroll", setHeaderState, { passive: true });
     window.addEventListener("load", () => requestAnimationFrame(scrollToCurrentHash));
@@ -1225,6 +1755,28 @@
       navMenu.classList.toggle("is-open", !isOpen);
       header.classList.toggle("menu-open", !isOpen);
       document.body.classList.toggle("nav-open", !isOpen);
+    });
+
+    partyOpen.addEventListener("click", openPartyDialog);
+    partyOpen.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openPartyDialog();
+      }
+    });
+    partyClose.addEventListener("click", closePartyDialog);
+    partyOk.addEventListener("click", closePartyDialog);
+
+    partyDialog.addEventListener("click", (event) => {
+      if (!partyPanel.contains(event.target)) {
+        closePartyDialog();
+      }
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !partyDialog.hidden) {
+        closePartyDialog();
+      }
     });
 
     navMenu.addEventListener("click", (event) => {
